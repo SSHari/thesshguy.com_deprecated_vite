@@ -6,12 +6,18 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "develop": "gatsby develop",
+    "format": "npm run format:files -- --write",
+    "format:files": "prettier --ignore-path .gitignore .",
+    "format:check": "npm run format:files -- --check",
+    "lint": "eslint .",
+    "prepare": "husky install",
+    "serve": "gatsby serve",
+    "start": "gatsby develop",
+    "test": "jest",
+    "typecheck": "tsc --noEmit --emitDeclarationOnly false",
+    "validate": "npm-run-all --parallel format:check lint test typecheck"
   },
   "dependencies": {
     "gatsby": "^4.0.0-zz-next.1",
@@ -19,7 +25,7 @@
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
-    "prettier": "2.3.2"
+    "ssh-dev-scripts": "^1.1.0"
   },
   "repository": {
     "type": "git",
