@@ -15,7 +15,7 @@
     "prepare": "husky install",
     "serve": "gatsby serve",
     "start": "gatsby develop",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "validate": "npm-run-all --parallel format:check lint test typecheck"
   },
