@@ -1,5 +1,7 @@
 node_modules
 babel.config.js
+gatsby-browser.js
+postcss.config.js
 release.config.js
 rollup.config.js
 **/__tests__/**
