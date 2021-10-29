@@ -1,1 +1,1 @@
-module.exports = require("ssh-dev-scripts/src/eslint.config")
+module.exports = require('ssh-dev-scripts/src/eslint.config');
