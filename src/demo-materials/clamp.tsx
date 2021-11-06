@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { CustomCSSProperties } from '../utils';
 
+/* Max Width Clamp Demo */
 export const maxWidthClampDemo = `
 .no-clamp {
   min-width: 600px;
@@ -14,6 +15,29 @@ export const maxWidthClampDemo = `
 }
 `;
 
+export const MaxWidthClampDemo = () => {
+  return (
+    <div className="overflow-hidden resize-x max-w-full">
+      <p className="font-medium text-center">
+        Resize the container to see how the two are affected.
+      </p>
+      <div
+        style={{ minWidth: '600px', width: '50%', maxWidth: '900px' }}
+        className="border-solid border border-gray-900 rounded my-8 mx-auto p-4 text-center"
+      >
+        Not clamped
+      </div>
+      <div
+        style={{ width: 'clamp(600px, 50%, 900px)', maxWidth: '100%' }}
+        className="border-solid border border-gray-900 rounded my-8 mx-auto p-4 text-center"
+      >
+        Clamped
+      </div>
+    </div>
+  );
+};
+
+/* Clamp Anything Demo */
 export const clampAnythingDemo = `
 .clamp-font-size {
   /* The font size is controlled by the range slider */
