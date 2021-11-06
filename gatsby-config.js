@@ -6,5 +6,22 @@
 
 module.exports = {
   /* Your site config here */
-  plugins: ['gatsby-plugin-postcss'],
+  plugins: [
+    'gatsby-plugin-postcss',
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'demos',
+        path: `${__dirname}/src/pages/demos`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-mdx',
+      options: {
+        defaultLayouts: {
+          demos: require.resolve('./src/components/DemosLayout.tsx'),
+        },
+      },
+    },
+  ],
 };

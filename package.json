@@ -20,10 +20,15 @@
     "validate": "npm-run-all --parallel format:check lint test typecheck"
   },
   "dependencies": {
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
     "autoprefixer": "^10.4.0",
     "gatsby": "^4.0.0-zz-next.1",
+    "gatsby-plugin-mdx": "^3.1.0",
     "gatsby-plugin-postcss": "^5.0.0",
+    "gatsby-source-filesystem": "^4.1.0",
     "postcss": "^8.3.11",
+    "prism-react-renderer": "^1.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "tailwindcss": "^2.2.17"
