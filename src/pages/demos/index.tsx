@@ -18,13 +18,16 @@ function DemosTable() {
     <table className="table-auto text-left flex flex-col">
       <thead className="border-b-2 border-gray-600 mb-4 text-gray-500 uppercase">
         <tr className="flex">
-          <th className="flex-1 p-2">Name</th>
-          <th className="flex-1 p-2">TIL</th>
+          <th className="flex-1 py-2 pl-3">Name</th>
+          <th className="flex-1 py-2 pl-3">TIL</th>
         </tr>
       </thead>
       <tbody>
         {demos.map((demo) => (
-          <tr key={demo.id} className="flex hover:bg-gray-300 rounded-md">
+          <tr
+            key={demo.id}
+            className="flex hover:bg-gray-300 border-solid border-l-4 border-transparent hover:border-primary rounded-md"
+          >
             <td className="flex-1 px-2 pt-4 pb-3">
               <Link className="hover:text-gray-700" to={demo.link}>
                 {demo.name}
