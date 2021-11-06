@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { CustomCSSProperties } from '../../../utils';
 
 export const maxWidthClampDemo = `
 .no-clamp {
@@ -25,8 +26,7 @@ export const ClampAnythingDemo = () => {
 
   return (
     <div
-      // @ts-ignore
-      style={{ '--demo-font-size': rangeValue + 'px' }}
+      style={{ '--demo-font-size': rangeValue + 'px' } as CustomCSSProperties}
       className="flex flex-col justify-center items-center max-w-full resize-x mb-8 text-lg"
     >
       <label className="flex flex-col items-center gap-2">

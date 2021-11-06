@@ -9,7 +9,7 @@ export default function CodeBlock({ code, lang }: CodeBlockProps) {
     <Highlight {...defaultProps} theme={theme} code={code} language={lang}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre
-          className={`${className} px-8 rounded-md my-8 relative`}
+          className={`${className} px-8 rounded-md my-8 relative overflow-x-auto`}
           style={style}
         >
           <span className="absolute right-4 top-0 font-bold">{lang}</span>

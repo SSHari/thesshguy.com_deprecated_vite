@@ -2,6 +2,7 @@ import * as React from 'react';
 // @ts-ignore
 import { MDXProvider } from '@mdx-js/react';
 import ToolbarHeader from '../components/ToolbarHeader';
+import { CustomCSSProperties } from '../utils';
 
 /* Shortcodes */
 import CodeBlock from '../components/CodeBlock';
@@ -11,7 +12,18 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
     <MDXProvider components={components}>
       <div className="isolate">
         <ToolbarHeader className="z-10" />
-        <main className="w-4/5 mx-auto my-8 px-4">{children}</main>
+        <main
+          style={
+            {
+              '--min-clamp': '500px',
+              '--ideal-clamp': '60%',
+              '--max-clamp': '800px',
+            } as CustomCSSProperties
+          }
+          className="clamp-width mx-auto my-8 p-4"
+        >
+          {children}
+        </main>
         {/* Temporary spacer component until we get a Footer */}
         <div className="h-8" />
       </div>

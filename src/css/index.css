@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  /* Theme CSS Variables */
   --color-white: 0 0% 100%;
   --color-primary: 193 82% 31%;
   --color-secondary: 345 83% 41%;
@@ -45,8 +46,13 @@ body {
 
 /* Custom Utilites */
 @layer utilities {
-  .home-main-wrapper {
-    width: clamp(500px, 60%, 800px);
+  .clamp-width {
+    /* Set the clamp variables as a style prop where it's used */
+    width: clamp(
+      var(--min-clamp, 0),
+      var(--ideal-clamp, 0),
+      var(--max-clamp, 0)
+    );
     max-width: 100%;
   }
 }

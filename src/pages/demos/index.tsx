@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link } from 'gatsby';
 import ToolbarHeader from '../../components/ToolbarHeader';
 import { githubUrl } from '../../constants';
+import { CustomCSSProperties } from '../../utils';
 
 const demos = [
   {
@@ -48,7 +49,16 @@ export default function Demos() {
   return (
     <>
       <ToolbarHeader />
-      <main className="w-4/5 mx-auto my-8 px-4">
+      <main
+        style={
+          {
+            '--min-clamp': '500px',
+            '--ideal-clamp': '60%',
+            '--max-clamp': '800px',
+          } as CustomCSSProperties
+        }
+        className="clamp-width mx-auto my-8 p-4"
+      >
         <h1 className="text-4xl font-medium mb-4">Today I Learned</h1>
         <p className="text-xl my-4">
           A series of demos related to things that I'm learning.

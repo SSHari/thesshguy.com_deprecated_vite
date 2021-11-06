@@ -1,11 +1,21 @@
 import * as React from 'react';
 import ToolbarHeader from '../components/ToolbarHeader';
+import { CustomCSSProperties } from '../utils';
 
 export default function Home() {
   return (
     <>
       <ToolbarHeader />
-      <main className="home-main-wrapper mx-auto my-8 p-4">
+      <main
+        style={
+          {
+            '--min-clamp': '500px',
+            '--ideal-clamp': '60%',
+            '--max-clamp': '800px',
+          } as CustomCSSProperties
+        }
+        className="clamp-width mx-auto my-8 p-4"
+      >
         <p className="text-6xl font-medium">Hi I'm Sai</p>
         <p className="text-3xl font-medium">The SSH Guy</p>
         <p className="my-6">
