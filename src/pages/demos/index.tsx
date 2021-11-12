@@ -1,19 +1,26 @@
 import * as React from 'react';
-import { Link } from 'gatsby';
+import { Link, graphql, PageProps } from 'gatsby';
 import ToolbarHeader from '../../components/ToolbarHeader';
 import { githubUrl } from '../../constants';
 import { CustomCSSProperties } from '../../utils';
 
-const demos = [
-  {
-    id: 'clamp',
-    name: 'CSS Clamp',
-    link: '/demos/clamp',
-    tilLink: '/css/clamp.md',
-  },
-];
+type DemoData = {
+  id: string;
+  name: string;
+  slug: string;
+  tilLink: string;
+};
 
-function DemosTable() {
+type DataType = {
+  allMdx: {
+    nodes: {
+      frontmatter: DemoData;
+      slug: string;
+    }[];
+  };
+};
+
+function DemosTable({ demos }: { demos: DemoData[] }) {
   return (
     <table className="table-auto text-left flex flex-col">
       <thead className="border-b-2 border-gray-600 mb-4 text-gray-500 uppercase">
@@ -29,7 +36,7 @@ function DemosTable() {
             className="flex hover:bg-gray-300 border-solid border-l-4 border-transparent hover:border-primary rounded-md"
           >
             <td className="flex-1 px-2 pt-4 pb-3">
-              <Link className="hover:text-gray-700" to={demo.link}>
+              <Link className="hover:text-gray-700" to={demo.slug}>
                 {demo.name}
               </Link>
             </td>
@@ -48,7 +55,12 @@ function DemosTable() {
   );
 }
 
-export default function Demos() {
+export default function Demos(props: PageProps<DataType>) {
+  const demos = props.data.allMdx.nodes.map(({ frontmatter, slug }) => ({
+    ...frontmatter,
+    slug,
+  }));
+
   return (
     <div
       style={
@@ -73,8 +85,23 @@ export default function Demos() {
           </a>
           .
         </p>
-        <DemosTable />
+        <DemosTable demos={demos} />
       </main>
     </div>
   );
 }
+
+export const query = graphql`
+  query {
+    allMdx {
+      nodes {
+        frontmatter {
+          id
+          name
+          tilLink
+        }
+        slug
+      }
+    }
+  }
+`;
