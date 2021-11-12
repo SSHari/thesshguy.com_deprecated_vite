@@ -6,7 +6,7 @@ export default function ToolbarHeader({ className }: { className?: string }) {
   return (
     <div
       className={css(
-        'bg-gray-/80 backdrop-filter backdrop-blur-sm text-gray-100 h-14 px-8 pt-6 flex items-center sticky -top-6',
+        'bg-gray-/90 backdrop-filter backdrop-blur-sm text-gray-100 h-14 px-8 pt-6 flex items-center sticky -top-6 rounded-b-lg',
         className,
       )}
     >
