@@ -50,18 +50,18 @@ function DemosTable() {
 
 export default function Demos() {
   return (
-    <>
+    <div
+      style={
+        {
+          '--min-clamp': '500px',
+          '--ideal-clamp': '60%',
+          '--max-clamp': '900px',
+        } as CustomCSSProperties
+      }
+      className="clamp-width mx-auto"
+    >
       <ToolbarHeader />
-      <main
-        style={
-          {
-            '--min-clamp': '500px',
-            '--ideal-clamp': '60%',
-            '--max-clamp': '800px',
-          } as CustomCSSProperties
-        }
-        className="clamp-width mx-auto my-8 p-4"
-      >
+      <main className="my-4 p-4">
         <h1 className="text-4xl font-medium mb-4">Today I Learned</h1>
         <p className="text-xl my-4">
           A series of demos related to things that I'm learning.
@@ -75,6 +75,6 @@ export default function Demos() {
         </p>
         <DemosTable />
       </main>
-    </>
+    </div>
   );
 }
