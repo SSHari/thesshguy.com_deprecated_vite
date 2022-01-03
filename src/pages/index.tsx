@@ -25,8 +25,8 @@ export default function Home() {
         <p className="my-6">Sorry! I can't help you with that.</p>
         <p className="my-6">
           So what's up with the SSH? I'm sure you're dying to find out. Well, it
-          turns out those actually just happen to be my initials. Also, it
-          sounds kind of cool and it rhymes.
+          turns out those are just my initials. Also, it sounds kind of cool and
+          it rhymes.
         </p>
         <p className="my-6">
           Put it all together and we end up with you just as confused about what
