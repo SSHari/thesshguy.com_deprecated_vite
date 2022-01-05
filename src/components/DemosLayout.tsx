@@ -1,9 +1,10 @@
 import * as React from 'react';
 // @ts-ignore
 import { MDXProvider } from '@mdx-js/react';
-import ToolbarHeader from '../components/ToolbarHeader';
+import * as asideComponents from './Aside';
+import CodeBlock from './CodeBlock';
+import ToolbarHeader from './ToolbarHeader';
 import { CustomCSSProperties } from '../utils';
-import CodeBlock from '../components/CodeBlock';
 
 export default function Layout({ children }: React.PropsWithChildren<{}>) {
   return (
@@ -28,6 +29,7 @@ export default function Layout({ children }: React.PropsWithChildren<{}>) {
 }
 
 /* Styled Components */
+// TODO: Move some of this into the overall styles
 const h1 = (props: any) => (
   <h1 className="text-5xl my-8 font-medium" {...props} />
 );
@@ -38,6 +40,10 @@ const h2 = (props: any) => (
 
 const h3 = (props: any) => (
   <h3 className="text-3xl my-4 font-medium" {...props} />
+);
+
+const a = (props: any) => (
+  <a className="text-primary hover:text-gray-600 font-medium" {...props} />
 );
 
 const code = ({ children = '', className = '' }: any) => {
@@ -56,9 +62,19 @@ const inlineCode = (props: any) => (
 );
 
 /* Shortcodes */
+
 // Text that is important for the topic being discussed
 const TopicText = (props: any) => (
   <span {...props} className="text-secondary font-medium" />
 );
 
-const components = { h1, h2, h3, code, inlineCode, TopicText };
+const components = {
+  h1,
+  h2,
+  h3,
+  a,
+  code,
+  inlineCode,
+  TopicText,
+  ...asideComponents,
+};

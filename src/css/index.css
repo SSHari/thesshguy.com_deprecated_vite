@@ -44,6 +44,10 @@ body {
   color: var(--color-gray-900);
 }
 
+p {
+  margin: 1.5rem 0;
+}
+
 /* Custom Utilites */
 @layer utilities {
   .clamp-width {
@@ -55,4 +59,13 @@ body {
     );
     max-width: 100%;
   }
+}
+
+/* 3rd Party Styles */
+.mermaid svg {
+  margin: auto;
+}
+
+.mermaid foreignObject {
+  height: 2rem;
 }
