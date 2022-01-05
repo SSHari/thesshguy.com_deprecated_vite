@@ -60,12 +60,3 @@ p {
     max-width: 100%;
   }
 }
-
-/* 3rd Party Styles */
-.mermaid svg {
-  margin: auto;
-}
-
-.mermaid foreignObject {
-  height: 2rem;
-}

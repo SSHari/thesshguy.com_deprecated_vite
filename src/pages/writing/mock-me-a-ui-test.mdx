@@ -234,15 +234,6 @@ The next set of arguments comes from what was passed to the msw request resolver
 
 In this case, the two types of requests we're mocking with msw is any **GET** request (i.e. `rest.get`) and any **POST** request (i.e. `rest.post`) with an endpoint that matches the regex `/api/` which in our case should catch everything. The callback function `mockResponse` parses the request and then calls the OpenAPIBackend's `handleRequest` method which will fire the `notImplemented` event for any expected request.
 
-```mermaid
-graph LR;
-
-Client -- Intercept API --> MSW
-MSW -- OpenAPIBackend Query --> Swagger[Swagger Document]
-Swagger -- Return Swagger Example --> MSW
-MSW -- Return Response --> Client
-```
-
 So then...what about unexpected requests?
 
 An unexpected request is any request which hasn't been defined in your swagger document which means there's no example for us to use. OpenAPIBackend provides us with another event in this case which we can use called <TopicText>notFound</TopicText>. This event will receive the same arguments as the <TopicText>notImplemented</TopicText> event. We'll just immediately respond with a <TopicText>404</TopicText> via msw since there's nothing for us to do. This way, you'll get a <TopicText>404</TopicText> in your tests which you can deal with accordingly.

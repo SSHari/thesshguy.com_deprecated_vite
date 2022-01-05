@@ -25,7 +25,6 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
-        gatsbyRemarkPlugins: ['gatsby-remark-mermaid'],
         defaultLayouts: {
           demos: require.resolve('./src/components/DemosLayout.tsx'),
           writing: require.resolve('./src/components/DemosLayout.tsx'),
