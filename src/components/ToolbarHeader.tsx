@@ -14,6 +14,9 @@ export default function ToolbarHeader({ className }: { className?: string }) {
         theSSHGuy
       </Link>
       <Link to="/demos">Demos</Link>
+      <Link className="ml-4" to="/writing">
+        Writing
+      </Link>
     </div>
   );
 }
