@@ -1,10 +1,6 @@
 node_modules
 babel.config.js
-gatsby-browser.js
-gatsby-config.js
-postcss.config.js
 prettier.config.js
-release.config.js
-rollup.config.js
 **/__tests__/**
-dist
+build
+public/build

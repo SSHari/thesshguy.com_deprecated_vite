@@ -5,42 +5,36 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "clean": "gatsby clean",
-    "develop": "gatsby develop",
+    "build": "remix build",
+    "deploy": "fly deploy --remote-only",
+    "dev": "remix dev",
     "format": "npm run format:files -- --write",
-    "format:files": "prettier --ignore-path .gitignore .",
+    "format:files": "prettier  .",
     "format:check": "npm run format:files -- --check",
     "lint": "eslint .",
+    "postinstall": "remix setup node",
     "prepare": "husky install",
-    "serve": "gatsby serve",
-    "start": "gatsby develop",
+    "start": "remix-serve build",
     "test": "jest --passWithNoTests",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "validate": "npm-run-all --parallel format:check lint test typecheck"
   },
   "dependencies": {
-    "@mdx-js/mdx": "^1.6.22",
-    "@mdx-js/react": "^1.6.22",
-    "autoprefixer": "^10.4.1",
-    "gatsby": "^4.4.0",
-    "gatsby-plugin-mdx": "^3.4.0",
-    "gatsby-plugin-postcss": "^5.4.0",
-    "gatsby-source-filesystem": "^4.4.0",
-    "postcss": "^8.4.5",
-    "prism-react-renderer": "^1.2.1",
+    "@remix-run/react": "^1.1.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "tailwindcss": "^3.0.11"
+    "remix": "^1.1.3",
+    "@remix-run/serve": "^1.1.3"
   },
   "devDependencies": {
-    "ssh-dev-scripts": "^1.1.0"
+    "ssh-dev-scripts": "^1.1.0",
+    "@remix-run/dev": "^1.1.3",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "typescript": "^4.1.2"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+  "engines": {
+    "node": ">=14"
   },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
-  }
+  "sideEffects": false
 }
