@@ -3,3 +3,5 @@ package.json
 package-lock.json
 build
 public/build
+
+/app/tailwind.css

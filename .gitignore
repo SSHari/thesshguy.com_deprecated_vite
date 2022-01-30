@@ -70,3 +70,6 @@ yarn-error.log
 /server/build
 /public/build
 .env
+
+# Tailwind
+/app/tailwind.css

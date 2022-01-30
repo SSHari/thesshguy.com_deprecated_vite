@@ -7,15 +7,12 @@ import {
   ScrollRestoration,
 } from 'remix';
 import type { MetaFunction, LinksFunction } from 'remix';
-import { ToolbarHeader, toolbarHeaderLinks } from '~/components/ToolbarHeader';
-import globalStyles from '~/styles/routes/global.css';
+
+import styles from './tailwind.css';
 
 export const meta: MetaFunction = () => ({ title: 'TheSSHGuy' });
 
-export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: globalStyles },
-  ...toolbarHeaderLinks(),
-];
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
 export default function App() {
   return (
@@ -28,7 +25,6 @@ export default function App() {
       </head>
       <body>
         <div id="___theSSHGuy">
-          <ToolbarHeader />
           <Outlet />
         </div>
         <ScrollRestoration />

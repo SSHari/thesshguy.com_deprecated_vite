@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   /* Theme CSS Variables */
   --color-white: 0 0% 100%;
@@ -43,4 +47,17 @@ body {
 
 p {
   margin: 1.5rem 0;
+}
+
+/* Custom Utilites */
+@layer utilities {
+  .clamp-width {
+    /* Set the clamp variables as a style prop where it's used */
+    width: clamp(
+      var(--min-clamp, 0),
+      var(--ideal-clamp, 0),
+      var(--max-clamp, 0)
+    );
+    max-width: 100%;
+  }
 }
