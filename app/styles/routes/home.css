@@ -1,0 +1,13 @@
+main {
+  width: clamp(500px, 60%, 900px);
+  max-width: 100%;
+  margin: auto;
+}
+
+#name {
+  font-size: 3.75rem;
+}
+
+#alias {
+  font-size: 1.875rem;
+}
