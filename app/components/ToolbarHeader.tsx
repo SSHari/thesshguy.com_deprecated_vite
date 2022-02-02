@@ -2,7 +2,7 @@ import { Link } from 'remix';
 
 export const ToolbarHeader = () => {
   return (
-    <div className="bg-gray-/90 backdrop-filter backdrop-blur-sm text-gray-100 h-14 px-8 pt-6 flex items-center sticky -top-6 rounded-b-lg z-10">
+    <div className="sticky -top-6 z-10 flex h-14 items-center rounded-b-lg bg-gray-/90 px-8 pt-6 text-gray-100 backdrop-blur-sm backdrop-filter">
       <Link className="mr-auto" to="/">
         theSSHGuy
       </Link>

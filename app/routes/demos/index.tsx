@@ -25,13 +25,13 @@ export const loader: LoaderFunction = async () => {
 function DemoWrapper({ children }: { children: React.ReactNode }) {
   return (
     <main className="my-4 p-4">
-      <h1 className="text-4xl font-medium mb-4">Today I Learned</h1>
-      <p className="text-xl my-4">
+      <h1 className="mb-4 text-4xl font-medium">Today I Learned</h1>
+      <p className="my-4 text-xl">
         A series of demos related to things that I'm learning.
       </p>
       <p className="mt-4 mb-8">
         Check out a more complete list of my{' '}
-        <a className="text-secondary font-bold" href={`${githubUrl}/til`}>
+        <a className="font-bold text-secondary" href={`${githubUrl}/til`}>
           TILs
         </a>
         .
@@ -46,8 +46,8 @@ export default function DemosIndex() {
 
   return (
     <DemoWrapper>
-      <table className="table-auto text-left flex flex-col">
-        <thead className="border-b-2 border-gray-600 mb-4 text-gray-500 uppercase">
+      <table className="flex table-auto flex-col text-left">
+        <thead className="mb-4 border-b-2 border-gray-600 uppercase text-gray-500">
           <tr className="flex">
             <th className="flex-1 py-2 pl-3">Name</th>
             <th className="flex-1 py-2 pl-3">TIL</th>
@@ -57,7 +57,7 @@ export default function DemosIndex() {
           {data.map((demo) => (
             <tr
               key={demo.id}
-              className="flex hover:bg-gray-300 border-solid border-l-4 border-transparent hover:border-primary rounded-md"
+              className="flex rounded-md border-l-4 border-solid border-transparent hover:border-primary hover:bg-gray-300"
             >
               <td className="flex-1 px-2 pt-4 pb-3">
                 <Link className="hover:text-gray-700" to={demo.content_slug}>
@@ -85,7 +85,7 @@ export default function DemosIndex() {
 // TODO: Handle this better
 export function CatchBoundary() {
   return (
-    <h1 className="mt-8 text-2xl text-center">
+    <h1 className="mt-8 text-center text-2xl">
       There was an issue loding the list of demos.
     </h1>
   );

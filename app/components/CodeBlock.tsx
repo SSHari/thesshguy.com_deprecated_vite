@@ -10,7 +10,7 @@ export const CodeBlock = ({ code, lang }: CodeBlockProps) => {
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <div className="relative">
           <span
-            className="absolute right-4 top-0 py-1 px-2 rounded-b-md bg-gray-300 text-gray-900 font-bold"
+            className="absolute right-4 top-0 rounded-b-md bg-gray-300 py-1 px-2 font-bold text-gray-900"
             style={{
               backgroundColor: style.color as string,
               color: style.backgroundColor as string,
@@ -20,7 +20,7 @@ export const CodeBlock = ({ code, lang }: CodeBlockProps) => {
           </span>
 
           <pre
-            className={`${className} p-8 rounded-md my-8 overflow-x-auto`}
+            className={`${className} my-8 overflow-x-auto rounded-md p-8`}
             style={style}
           >
             {tokens.map((line, i) => (

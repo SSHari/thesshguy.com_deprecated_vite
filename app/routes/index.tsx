@@ -16,8 +16,8 @@ export default function Index() {
       <ToolbarHeader />
 
       <main className="my-4 p-4">
-        <p className="text-6xl m-0 font-medium">Hi I'm Sai</p>
-        <p className="text-3xl m-0 font-medium">The SSH Guy</p>
+        <p className="m-0 text-6xl font-medium">Hi I'm Sai</p>
+        <p className="m-0 text-3xl font-medium">The SSH Guy</p>
         <p>
           With a name like SSH, you probably came here expecting me to tell you
           about networking or security or some other third thing.
