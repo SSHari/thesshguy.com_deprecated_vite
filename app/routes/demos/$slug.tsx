@@ -11,8 +11,8 @@ type LoaderData = Required<Pick<Demo, 'title' | 'content'>>;
 export const loader: LoaderFunction = async ({ params }) => {
   const { data, error } = await supabase
     .from<Demo>('Demos')
-    .select('id, title, content')
-    .eq('content_slug', params.slug)
+    .select('demo_id, title, content')
+    .eq('demo_slug', params.slug ?? '')
     .single();
 
   if (error) {

@@ -73,3 +73,8 @@ yarn-error.log
 
 # Tailwind
 /app/tailwind.css
+
+# Supabase
+**/supabase/.branches
+**/supabase/.temp
+**/supabase/.env

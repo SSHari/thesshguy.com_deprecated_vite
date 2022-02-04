@@ -6,14 +6,14 @@ import { supabase } from '~/utils/supabase';
 
 type DemoItem = Pick<
   definitions['Demos'],
-  'id' | 'title' | 'updated_at' | 'content_slug' | 'til_link'
+  'demo_id' | 'title' | 'updated_at' | 'demo_slug' | 'til_link'
 >;
 type LoaderData = DemoItem[];
 
 export const loader: LoaderFunction = async () => {
   const { data, error } = await supabase
     .from<LoaderData>('Demos')
-    .select('id, title, updated_at, content_slug, til_link');
+    .select('demo_id, title, updated_at, demo_slug, til_link');
 
   if (error) {
     throw new Response(error.message, { status: 404 });
@@ -56,11 +56,11 @@ export default function DemosIndex() {
         <tbody>
           {data.map((demo) => (
             <tr
-              key={demo.id}
+              key={demo.demo_id}
               className="flex rounded-md border-l-4 border-solid border-transparent hover:border-primary hover:bg-gray-300"
             >
               <td className="flex-1 px-2 pt-4 pb-3">
-                <Link className="hover:text-gray-700" to={demo.content_slug}>
+                <Link className="hover:text-gray-700" to={demo.demo_slug}>
                   {demo.title}
                 </Link>
               </td>

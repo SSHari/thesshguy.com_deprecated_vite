@@ -16,13 +16,13 @@ export interface paths {
     get: {
       parameters: {
         query: {
-          id?: parameters['rowFilter.Demos.id'];
+          demo_id?: parameters['rowFilter.Demos.demo_id'];
           created_at?: parameters['rowFilter.Demos.created_at'];
           content?: parameters['rowFilter.Demos.content'];
           updated_at?: parameters['rowFilter.Demos.updated_at'];
           title?: parameters['rowFilter.Demos.title'];
-          content_slug?: parameters['rowFilter.Demos.content_slug'];
-          content_creator?: parameters['rowFilter.Demos.content_creator'];
+          demo_slug?: parameters['rowFilter.Demos.demo_slug'];
+          user_id?: parameters['rowFilter.Demos.user_id'];
           is_published?: parameters['rowFilter.Demos.is_published'];
           /** Path to Github TIL Entry */
           til_link?: parameters['rowFilter.Demos.til_link'];
@@ -76,13 +76,13 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          id?: parameters['rowFilter.Demos.id'];
+          demo_id?: parameters['rowFilter.Demos.demo_id'];
           created_at?: parameters['rowFilter.Demos.created_at'];
           content?: parameters['rowFilter.Demos.content'];
           updated_at?: parameters['rowFilter.Demos.updated_at'];
           title?: parameters['rowFilter.Demos.title'];
-          content_slug?: parameters['rowFilter.Demos.content_slug'];
-          content_creator?: parameters['rowFilter.Demos.content_creator'];
+          demo_slug?: parameters['rowFilter.Demos.demo_slug'];
+          user_id?: parameters['rowFilter.Demos.user_id'];
           is_published?: parameters['rowFilter.Demos.is_published'];
           /** Path to Github TIL Entry */
           til_link?: parameters['rowFilter.Demos.til_link'];
@@ -100,13 +100,13 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          id?: parameters['rowFilter.Demos.id'];
+          demo_id?: parameters['rowFilter.Demos.demo_id'];
           created_at?: parameters['rowFilter.Demos.created_at'];
           content?: parameters['rowFilter.Demos.content'];
           updated_at?: parameters['rowFilter.Demos.updated_at'];
           title?: parameters['rowFilter.Demos.title'];
-          content_slug?: parameters['rowFilter.Demos.content_slug'];
-          content_creator?: parameters['rowFilter.Demos.content_creator'];
+          demo_slug?: parameters['rowFilter.Demos.demo_slug'];
+          user_id?: parameters['rowFilter.Demos.user_id'];
           is_published?: parameters['rowFilter.Demos.is_published'];
           /** Path to Github TIL Entry */
           til_link?: parameters['rowFilter.Demos.til_link'];
@@ -136,32 +136,32 @@ export interface definitions {
      * @description Note:
      * This is a Primary Key.<pk/>
      */
-    id: number;
+    demo_id: number;
     /**
      * Format: timestamp with time zone
      * @default now()
      */
-    created_at?: string;
+    created_at: string;
     /** Format: text */
-    content?: string;
+    content: string;
     /**
      * Format: timestamp with time zone
      * @default now()
      */
-    updated_at?: string;
+    updated_at: string;
     /** Format: text */
     title: string;
     /** Format: text */
-    content_slug: string;
+    demo_slug: string;
     /** Format: uuid */
-    content_creator: string;
+    user_id: string;
     /** Format: boolean */
     is_published: boolean;
     /**
      * Format: text
      * @description Path to Github TIL Entry
      */
-    til_link?: string;
+    til_link: string;
   };
 }
 
@@ -201,7 +201,7 @@ export interface parameters {
   /** @description Demos */
   'body.Demos': definitions['Demos'];
   /** Format: bigint */
-  'rowFilter.Demos.id': string;
+  'rowFilter.Demos.demo_id': string;
   /** Format: timestamp with time zone */
   'rowFilter.Demos.created_at': string;
   /** Format: text */
@@ -211,9 +211,9 @@ export interface parameters {
   /** Format: text */
   'rowFilter.Demos.title': string;
   /** Format: text */
-  'rowFilter.Demos.content_slug': string;
+  'rowFilter.Demos.demo_slug': string;
   /** Format: uuid */
-  'rowFilter.Demos.content_creator': string;
+  'rowFilter.Demos.user_id': string;
   /** Format: boolean */
   'rowFilter.Demos.is_published': string;
   /**
