@@ -1,7 +1,11 @@
 import { ToolbarHeader } from '~/components/ToolbarHeader';
 import type { CustomCSSProperties } from '~/utils/styles';
+import { useMagicLink } from '~/utils/use-magic-link';
 
-export default function Index() {
+export default function IndexRoute() {
+  // Handle magic links from supabase
+  useMagicLink();
+
   return (
     <div
       style={

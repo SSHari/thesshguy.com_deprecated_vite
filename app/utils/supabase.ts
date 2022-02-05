@@ -9,16 +9,10 @@ declare global {
 }
 
 const supabaseUrl = process.env.SUPABASE_URL;
-invariant(
-  typeof supabaseUrl === 'string',
-  'The env variable SUPABASE_URL needs to be set.',
-);
+invariant(!!supabaseUrl, 'The env variable SUPABASE_URL needs to be set.');
 
 const supabaseKey = process.env.SUPABASE_KEY;
-invariant(
-  typeof supabaseKey === 'string',
-  'The env variable SUPABASE_KEY needs to be set.',
-);
+invariant(!!supabaseKey, 'The env variable SUPABASE_KEY needs to be set.');
 
 // this is needed because in development we don't want to restart
 // the server with every change, but we want to make sure we don't
