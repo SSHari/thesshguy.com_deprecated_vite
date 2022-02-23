@@ -54,7 +54,7 @@ export default function LoginRoute() {
     body = (
       <Form method="post" className="mt-4 flex flex-col">
         <label className="flex flex-col">
-          <span>Email:</span>
+          <span className="font-bold">Email:</span>
           <input
             className="rounded border border-gray-900 py-1 px-2"
             defaultValue={actionData?.fields?.email ?? ''}
@@ -62,10 +62,7 @@ export default function LoginRoute() {
             placeholder="test@test.com"
           />
         </label>
-        <button
-          type="submit"
-          className="mt-4 self-end rounded border border-gray-900 bg-primary py-2 px-4 text-white hover:bg-gray-500 focus:bg-gray-500 active:bg-gray-700 disabled:bg-gray-300"
-        >
+        <button type="submit" className="btn-primary self-end">
           Log In
         </button>
         {actionData?.formError && (

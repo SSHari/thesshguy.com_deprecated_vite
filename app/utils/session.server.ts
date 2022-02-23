@@ -51,9 +51,13 @@ function getUserSession(request: Request) {
   return storage.getSession(request.headers.get('Cookie'));
 }
 
-export async function getUser(request: Request) {
+export async function getAuthToken(request: Request) {
   const session = await getUserSession(request);
-  const token = session.get(tokenKey);
+  return session.get(tokenKey);
+}
+
+export async function getUser(request: Request) {
+  const token = await getAuthToken(request);
   if (!token || typeof token !== 'string') return null;
 
   const { user, error } = await supabase.auth.api.getUser(token);

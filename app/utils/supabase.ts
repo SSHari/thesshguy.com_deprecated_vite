@@ -14,6 +14,12 @@ invariant(!!supabaseUrl, 'The env variable SUPABASE_URL needs to be set.');
 const supabaseKey = process.env.SUPABASE_KEY;
 invariant(!!supabaseKey, 'The env variable SUPABASE_KEY needs to be set.');
 
+const createAuthClient = (jwt: string) => {
+  const client = createClient(supabaseUrl, supabaseKey);
+  client.auth.setAuth(jwt);
+  return client;
+};
+
 // this is needed because in development we don't want to restart
 // the server with every change, but we want to make sure we don't
 // create a new connection to the DB with every change either.
@@ -26,4 +32,4 @@ if (process.env.NODE_ENV === 'production') {
   supabase = global.__supabase;
 }
 
-export { supabase };
+export { supabase, createAuthClient };
