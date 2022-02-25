@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-  '/': {
+  "/": {
     get: {
       responses: {
         /** OK */
@@ -12,42 +12,40 @@ export interface paths {
       };
     };
   };
-  '/Demos': {
+  "/Blogs": {
     get: {
       parameters: {
         query: {
-          demo_id?: parameters['rowFilter.Demos.demo_id'];
-          created_at?: parameters['rowFilter.Demos.created_at'];
-          content?: parameters['rowFilter.Demos.content'];
-          updated_at?: parameters['rowFilter.Demos.updated_at'];
-          title?: parameters['rowFilter.Demos.title'];
-          demo_slug?: parameters['rowFilter.Demos.demo_slug'];
-          user_id?: parameters['rowFilter.Demos.user_id'];
-          is_published?: parameters['rowFilter.Demos.is_published'];
-          /** Path to Github TIL Entry */
-          til_link?: parameters['rowFilter.Demos.til_link'];
+          blog_id?: parameters["rowFilter.Blogs.blog_id"];
+          content?: parameters["rowFilter.Blogs.content"];
+          title?: parameters["rowFilter.Blogs.title"];
+          blog_slug?: parameters["rowFilter.Blogs.blog_slug"];
+          user_id?: parameters["rowFilter.Blogs.user_id"];
+          created_at?: parameters["rowFilter.Blogs.created_at"];
+          updated_at?: parameters["rowFilter.Blogs.updated_at"];
+          is_published?: parameters["rowFilter.Blogs.is_published"];
           /** Filtering Columns */
-          select?: parameters['select'];
+          select?: parameters["select"];
           /** Ordering */
-          order?: parameters['order'];
+          order?: parameters["order"];
           /** Limiting and Pagination */
-          offset?: parameters['offset'];
+          offset?: parameters["offset"];
           /** Limiting and Pagination */
-          limit?: parameters['limit'];
+          limit?: parameters["limit"];
         };
         header: {
           /** Limiting and Pagination */
-          Range?: parameters['range'];
+          Range?: parameters["range"];
           /** Limiting and Pagination */
-          'Range-Unit'?: parameters['rangeUnit'];
+          "Range-Unit"?: parameters["rangeUnit"];
           /** Preference */
-          Prefer?: parameters['preferCount'];
+          Prefer?: parameters["preferCount"];
         };
       };
       responses: {
         /** OK */
         200: {
-          schema: definitions['Demos'][];
+          schema: definitions["Blogs"][];
         };
         /** Partial Content */
         206: unknown;
@@ -56,16 +54,16 @@ export interface paths {
     post: {
       parameters: {
         body: {
-          /** Demos */
-          Demos?: definitions['Demos'];
+          /** Blogs */
+          Blogs?: definitions["Blogs"];
         };
         query: {
           /** Filtering Columns */
-          select?: parameters['select'];
+          select?: parameters["select"];
         };
         header: {
           /** Preference */
-          Prefer?: parameters['preferReturn'];
+          Prefer?: parameters["preferReturn"];
         };
       };
       responses: {
@@ -76,20 +74,18 @@ export interface paths {
     delete: {
       parameters: {
         query: {
-          demo_id?: parameters['rowFilter.Demos.demo_id'];
-          created_at?: parameters['rowFilter.Demos.created_at'];
-          content?: parameters['rowFilter.Demos.content'];
-          updated_at?: parameters['rowFilter.Demos.updated_at'];
-          title?: parameters['rowFilter.Demos.title'];
-          demo_slug?: parameters['rowFilter.Demos.demo_slug'];
-          user_id?: parameters['rowFilter.Demos.user_id'];
-          is_published?: parameters['rowFilter.Demos.is_published'];
-          /** Path to Github TIL Entry */
-          til_link?: parameters['rowFilter.Demos.til_link'];
+          blog_id?: parameters["rowFilter.Blogs.blog_id"];
+          content?: parameters["rowFilter.Blogs.content"];
+          title?: parameters["rowFilter.Blogs.title"];
+          blog_slug?: parameters["rowFilter.Blogs.blog_slug"];
+          user_id?: parameters["rowFilter.Blogs.user_id"];
+          created_at?: parameters["rowFilter.Blogs.created_at"];
+          updated_at?: parameters["rowFilter.Blogs.updated_at"];
+          is_published?: parameters["rowFilter.Blogs.is_published"];
         };
         header: {
           /** Preference */
-          Prefer?: parameters['preferReturn'];
+          Prefer?: parameters["preferReturn"];
         };
       };
       responses: {
@@ -100,24 +96,136 @@ export interface paths {
     patch: {
       parameters: {
         query: {
-          demo_id?: parameters['rowFilter.Demos.demo_id'];
-          created_at?: parameters['rowFilter.Demos.created_at'];
-          content?: parameters['rowFilter.Demos.content'];
-          updated_at?: parameters['rowFilter.Demos.updated_at'];
-          title?: parameters['rowFilter.Demos.title'];
-          demo_slug?: parameters['rowFilter.Demos.demo_slug'];
-          user_id?: parameters['rowFilter.Demos.user_id'];
-          is_published?: parameters['rowFilter.Demos.is_published'];
-          /** Path to Github TIL Entry */
-          til_link?: parameters['rowFilter.Demos.til_link'];
+          blog_id?: parameters["rowFilter.Blogs.blog_id"];
+          content?: parameters["rowFilter.Blogs.content"];
+          title?: parameters["rowFilter.Blogs.title"];
+          blog_slug?: parameters["rowFilter.Blogs.blog_slug"];
+          user_id?: parameters["rowFilter.Blogs.user_id"];
+          created_at?: parameters["rowFilter.Blogs.created_at"];
+          updated_at?: parameters["rowFilter.Blogs.updated_at"];
+          is_published?: parameters["rowFilter.Blogs.is_published"];
         };
         body: {
-          /** Demos */
-          Demos?: definitions['Demos'];
+          /** Blogs */
+          Blogs?: definitions["Blogs"];
         };
         header: {
           /** Preference */
-          Prefer?: parameters['preferReturn'];
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+  };
+  "/Demos": {
+    get: {
+      parameters: {
+        query: {
+          demo_id?: parameters["rowFilter.Demos.demo_id"];
+          created_at?: parameters["rowFilter.Demos.created_at"];
+          content?: parameters["rowFilter.Demos.content"];
+          updated_at?: parameters["rowFilter.Demos.updated_at"];
+          title?: parameters["rowFilter.Demos.title"];
+          demo_slug?: parameters["rowFilter.Demos.demo_slug"];
+          user_id?: parameters["rowFilter.Demos.user_id"];
+          is_published?: parameters["rowFilter.Demos.is_published"];
+          /** Path to Github TIL Entry */
+          til_link?: parameters["rowFilter.Demos.til_link"];
+          /** Filtering Columns */
+          select?: parameters["select"];
+          /** Ordering */
+          order?: parameters["order"];
+          /** Limiting and Pagination */
+          offset?: parameters["offset"];
+          /** Limiting and Pagination */
+          limit?: parameters["limit"];
+        };
+        header: {
+          /** Limiting and Pagination */
+          Range?: parameters["range"];
+          /** Limiting and Pagination */
+          "Range-Unit"?: parameters["rangeUnit"];
+          /** Preference */
+          Prefer?: parameters["preferCount"];
+        };
+      };
+      responses: {
+        /** OK */
+        200: {
+          schema: definitions["Demos"][];
+        };
+        /** Partial Content */
+        206: unknown;
+      };
+    };
+    post: {
+      parameters: {
+        body: {
+          /** Demos */
+          Demos?: definitions["Demos"];
+        };
+        query: {
+          /** Filtering Columns */
+          select?: parameters["select"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** Created */
+        201: unknown;
+      };
+    };
+    delete: {
+      parameters: {
+        query: {
+          demo_id?: parameters["rowFilter.Demos.demo_id"];
+          created_at?: parameters["rowFilter.Demos.created_at"];
+          content?: parameters["rowFilter.Demos.content"];
+          updated_at?: parameters["rowFilter.Demos.updated_at"];
+          title?: parameters["rowFilter.Demos.title"];
+          demo_slug?: parameters["rowFilter.Demos.demo_slug"];
+          user_id?: parameters["rowFilter.Demos.user_id"];
+          is_published?: parameters["rowFilter.Demos.is_published"];
+          /** Path to Github TIL Entry */
+          til_link?: parameters["rowFilter.Demos.til_link"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
+        };
+      };
+      responses: {
+        /** No Content */
+        204: never;
+      };
+    };
+    patch: {
+      parameters: {
+        query: {
+          demo_id?: parameters["rowFilter.Demos.demo_id"];
+          created_at?: parameters["rowFilter.Demos.created_at"];
+          content?: parameters["rowFilter.Demos.content"];
+          updated_at?: parameters["rowFilter.Demos.updated_at"];
+          title?: parameters["rowFilter.Demos.title"];
+          demo_slug?: parameters["rowFilter.Demos.demo_slug"];
+          user_id?: parameters["rowFilter.Demos.user_id"];
+          is_published?: parameters["rowFilter.Demos.is_published"];
+          /** Path to Github TIL Entry */
+          til_link?: parameters["rowFilter.Demos.til_link"];
+        };
+        body: {
+          /** Demos */
+          Demos?: definitions["Demos"];
+        };
+        header: {
+          /** Preference */
+          Prefer?: parameters["preferReturn"];
         };
       };
       responses: {
@@ -129,6 +237,35 @@ export interface paths {
 }
 
 export interface definitions {
+  /** @description MDX for blog posts */
+  Blogs: {
+    /**
+     * Format: bigint
+     * @description Note:
+     * This is a Primary Key.<pk/>
+     */
+    blog_id: number;
+    /** Format: text */
+    content: string;
+    /** Format: text */
+    title: string;
+    /** Format: text */
+    blog_slug: string;
+    /** Format: uuid */
+    user_id: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    created_at: string;
+    /**
+     * Format: timestamp with time zone
+     * @default now()
+     */
+    updated_at: string;
+    /** Format: boolean */
+    is_published: boolean;
+  };
   /** @description MDX for demos related to TILs */
   Demos: {
     /**
@@ -170,17 +307,17 @@ export interface parameters {
    * @description Preference
    * @enum {string}
    */
-  preferParams: 'params=single-object';
+  preferParams: "params=single-object";
   /**
    * @description Preference
    * @enum {string}
    */
-  preferReturn: 'return=representation' | 'return=minimal' | 'return=none';
+  preferReturn: "return=representation" | "return=minimal" | "return=none";
   /**
    * @description Preference
    * @enum {string}
    */
-  preferCount: 'count=none';
+  preferCount: "count=none";
   /** @description Filtering Columns */
   select: string;
   /** @description On Conflict */
@@ -198,29 +335,47 @@ export interface parameters {
   offset: string;
   /** @description Limiting and Pagination */
   limit: string;
-  /** @description Demos */
-  'body.Demos': definitions['Demos'];
+  /** @description Blogs */
+  "body.Blogs": definitions["Blogs"];
   /** Format: bigint */
-  'rowFilter.Demos.demo_id': string;
-  /** Format: timestamp with time zone */
-  'rowFilter.Demos.created_at': string;
+  "rowFilter.Blogs.blog_id": string;
   /** Format: text */
-  'rowFilter.Demos.content': string;
-  /** Format: timestamp with time zone */
-  'rowFilter.Demos.updated_at': string;
+  "rowFilter.Blogs.content": string;
   /** Format: text */
-  'rowFilter.Demos.title': string;
+  "rowFilter.Blogs.title": string;
   /** Format: text */
-  'rowFilter.Demos.demo_slug': string;
+  "rowFilter.Blogs.blog_slug": string;
   /** Format: uuid */
-  'rowFilter.Demos.user_id': string;
+  "rowFilter.Blogs.user_id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.Blogs.created_at": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.Blogs.updated_at": string;
   /** Format: boolean */
-  'rowFilter.Demos.is_published': string;
+  "rowFilter.Blogs.is_published": string;
+  /** @description Demos */
+  "body.Demos": definitions["Demos"];
+  /** Format: bigint */
+  "rowFilter.Demos.demo_id": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.Demos.created_at": string;
+  /** Format: text */
+  "rowFilter.Demos.content": string;
+  /** Format: timestamp with time zone */
+  "rowFilter.Demos.updated_at": string;
+  /** Format: text */
+  "rowFilter.Demos.title": string;
+  /** Format: text */
+  "rowFilter.Demos.demo_slug": string;
+  /** Format: uuid */
+  "rowFilter.Demos.user_id": string;
+  /** Format: boolean */
+  "rowFilter.Demos.is_published": string;
   /**
    * Format: text
    * @description Path to Github TIL Entry
    */
-  'rowFilter.Demos.til_link': string;
+  "rowFilter.Demos.til_link": string;
 }
 
 export interface operations {}
