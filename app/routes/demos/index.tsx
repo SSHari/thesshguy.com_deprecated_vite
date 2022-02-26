@@ -2,7 +2,7 @@ import { useLoaderData, Link } from 'remix';
 import type { LoaderFunction } from 'remix';
 import type { definitions } from '~/types/supabase';
 import { githubUrl } from '~/utils/constants';
-import { supabase } from '~/utils/supabase';
+import { supabase } from '~/utils/supabase.server';
 
 type DemoItem = Pick<
   definitions['Demos'],

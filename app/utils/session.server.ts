@@ -1,6 +1,6 @@
 import { createCookieSessionStorage, redirect } from 'remix';
 import invariant from 'tiny-invariant';
-import { supabase } from './supabase';
+import { supabase } from './supabase.server';
 
 /*
  * CONSTANTS

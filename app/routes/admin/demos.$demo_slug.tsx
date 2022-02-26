@@ -7,8 +7,7 @@ import {
 } from 'remix';
 import type { ActionFunction, LoaderFunction } from 'remix';
 import { DemoEditor } from '~/components/DemoEditor';
-// TODO: Rename to a server only file
-import { createAuthClient } from '~/utils/supabase';
+import { createAuthClient } from '~/utils/supabase.server';
 import type { definitions } from '~/types/supabase';
 import { getAuthToken } from '~/utils/session.server';
 

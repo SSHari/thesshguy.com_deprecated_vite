@@ -1,8 +1,7 @@
 import { useActionData, useTransition, redirect, json } from 'remix';
 import type { ActionFunction } from 'remix';
 import { DemoEditor } from '~/components/DemoEditor';
-// TODO: Rename to a server only file
-import { createAuthClient } from '~/utils/supabase';
+import { createAuthClient } from '~/utils/supabase.server';
 import type { definitions } from '~/types/supabase';
 import { getAuthToken, getUser } from '~/utils/session.server';
 

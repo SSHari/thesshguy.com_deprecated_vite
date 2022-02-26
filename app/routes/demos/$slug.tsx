@@ -3,7 +3,7 @@ import type { LoaderFunction } from 'remix';
 import { MDXLayout } from '~/components/MDXLayout';
 import { bundleMDX } from '~/utils/mdx-handler.server';
 import type { definitions } from '~/types/supabase';
-import { supabase } from '~/utils/supabase';
+import { supabase } from '~/utils/supabase.server';
 
 type Demo = definitions['Demos'];
 type LoaderData = Required<Pick<Demo, 'title' | 'content'>>;

@@ -1,6 +1,6 @@
 import { useLoaderData, Link } from 'remix';
 import type { LoaderFunction } from 'remix';
-import { createAuthClient } from '~/utils/supabase';
+import { createAuthClient } from '~/utils/supabase.server';
 import type { definitions } from '~/types/supabase';
 import { getAuthToken } from '~/utils/session.server';
 

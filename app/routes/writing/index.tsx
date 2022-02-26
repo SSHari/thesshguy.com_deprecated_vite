@@ -1,7 +1,7 @@
 import { useLoaderData, Link } from 'remix';
 import type { LoaderFunction } from 'remix';
 import type { definitions } from '~/types/supabase';
-import { supabase } from '~/utils/supabase';
+import { supabase } from '~/utils/supabase.server';
 
 type BlogItem = Pick<
   definitions['Blogs'],
