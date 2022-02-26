@@ -9,8 +9,9 @@ export const ToolbarHeader = () => {
       <Link className="ml-4" to="/demos">
         Demos
       </Link>
-      {/* Add this back in once the DB is configured */}
-      {/* <Link className="ml-4" to="/writing">Writing</Link> */}
+      <Link className="ml-4" to="/writing">
+        Writing
+      </Link>
     </div>
   );
 };
