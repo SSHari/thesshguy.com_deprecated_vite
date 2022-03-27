@@ -72,7 +72,7 @@ export default function BlogsIndex() {
 export function CatchBoundary() {
   return (
     <h1 className="mt-8 text-center text-2xl">
-      There was an issue loding the list of blogs.
+      There was an issue loading the list of blogs.
     </h1>
   );
 }
