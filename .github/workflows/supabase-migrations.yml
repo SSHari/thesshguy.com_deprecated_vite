@@ -1,0 +1,19 @@
+name: Update Supabase Migrations
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'supabase/migrations/**'
+
+jobs:
+  migration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Supabase CLI
+        run: brew install supabase/tap/supabase
+      - name: Set Remote DB
+        run: supabase db remote set ${{ secrets.SUPABASE_REMOTE_DB_URL }}
+      - name: Push Migrations
+        run: supabase db push
