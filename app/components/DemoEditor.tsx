@@ -1,4 +1,5 @@
 import { Form } from 'remix';
+import { MDXPreviewer } from './MDXPreviewer';
 
 type DemoEditorProps = {
   demo_id?: number;
@@ -10,21 +11,6 @@ type DemoEditorProps = {
   formError?: string;
   isIdle: boolean;
 };
-
-const demoContentPlaceHolder = `
-# How to Build a Demo
-
-This is how to build a demo:
-
-## Step 1
-Do the thing
-
-## Step 2
-???
-
-### Step 3
-Profit
-`.trim();
 
 export const DemoEditor = (props: DemoEditorProps) => {
   return (
@@ -68,15 +54,7 @@ export const DemoEditor = (props: DemoEditorProps) => {
           name="is_published"
         />
       </label>
-      <label className="flex flex-col gap-1">
-        <span className="font-bold">Content:</span>
-        <textarea
-          className="h-96 resize-none rounded border border-gray-900 py-1 px-2"
-          defaultValue={props.content ?? ''}
-          name="content"
-          placeholder={demoContentPlaceHolder}
-        />
-      </label>
+      <MDXPreviewer content={props.content ?? ''} fieldName="content" />
       <div className="flex justify-between">
         <span className="self-center text-center text-secondary">
           {props.formError}

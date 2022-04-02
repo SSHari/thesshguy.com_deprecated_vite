@@ -1,4 +1,5 @@
 import { Form } from 'remix';
+import { MDXPreviewer } from './MDXPreviewer';
 
 type BlogEditorProps = {
   blog_id?: number;
@@ -9,21 +10,6 @@ type BlogEditorProps = {
   formError?: string;
   isIdle: boolean;
 };
-
-const blogContentPlaceHolder = `
-# How to Build a Blog
-
-This is how to build a blog:
-
-## Step 1
-Do the thing
-
-## Step 2
-???
-
-### Step 3
-Profit
-`.trim();
 
 export const BlogEditor = (props: BlogEditorProps) => {
   return (
@@ -58,15 +44,7 @@ export const BlogEditor = (props: BlogEditorProps) => {
           name="is_published"
         />
       </label>
-      <label className="flex flex-col gap-1">
-        <span className="font-bold">Content:</span>
-        <textarea
-          className="h-96 resize-none rounded border border-gray-900 py-1 px-2"
-          defaultValue={props.content ?? ''}
-          name="content"
-          placeholder={blogContentPlaceHolder}
-        />
-      </label>
+      <MDXPreviewer content={props.content ?? ''} fieldName="content" />
       <div className="flex justify-between">
         <span className="self-center text-center text-secondary">
           {props.formError}

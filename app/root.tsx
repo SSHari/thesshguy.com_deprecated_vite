@@ -8,11 +8,13 @@ import {
 } from 'remix';
 import type { MetaFunction, LinksFunction } from 'remix';
 
-import styles from './tailwind.css';
+import coreStyles from './tailwind.css';
 
 export const meta: MetaFunction = () => ({ title: 'TheSSHGuy' });
 
-export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: coreStyles },
+];
 
 export default function App() {
   return (

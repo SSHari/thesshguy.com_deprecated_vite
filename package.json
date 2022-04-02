@@ -24,6 +24,7 @@
     "validate": "npm-run-all --parallel format:check lint test typecheck"
   },
   "dependencies": {
+    "@reach/dialog": "^0.16.2",
     "@remix-run/react": "^1.1.3",
     "@remix-run/serve": "^1.1.3",
     "@supabase/supabase-js": "^1.29.4",

@@ -19,7 +19,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     throw new Response(error.message, { status: 404 });
   }
 
-  const code = await bundleMDX(data?.content ?? '');
+  const { code } = await bundleMDX(data?.content ?? '');
 
   return { title: data?.title, content: code };
 };
