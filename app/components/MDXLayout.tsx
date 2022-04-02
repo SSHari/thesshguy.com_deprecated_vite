@@ -1,5 +1,7 @@
 import { useMemo } from 'react';
 import { getMDXComponent } from 'mdx-bundler/client';
+import { ErrorBoundary } from 'react-error-boundary';
+import type { FallbackProps } from 'react-error-boundary';
 import { CodeBlock } from './CodeBlock';
 
 /* Styled Components */
@@ -44,11 +46,30 @@ const TopicText = (props: any) => (
 
 const components = { h1, h2, h3, a, code, inlineCode, TopicText };
 
+const MDXErrorBoundaryFallback = (props: FallbackProps) => {
+  return (
+    <div className="flex flex-col items-center gap-2">
+      <span className="text-2xl font-bold">Oh no!</span>
+      <span className="text-xl">There was an issue rendering the MDX</span>
+      <span className="text-sm">Blame Sai...</span>
+      <div className="mt-2 flex w-full flex-col gap-2">
+        <span className="font-bold">Error:</span>
+        <pre className="overflow-auto">{props.error.message}</pre>
+      </div>
+    </div>
+  );
+};
+
 export const MDXLayout = ({ mdx }: { mdx: string }) => {
   const Component = useMemo(() => getMDXComponent(mdx), [mdx]);
   return (
     <div className="isolate">
-      <Component components={components} />
+      <ErrorBoundary
+        FallbackComponent={MDXErrorBoundaryFallback}
+        resetKeys={[Component]}
+      >
+        <Component components={components} />
+      </ErrorBoundary>
     </div>
   );
 };
