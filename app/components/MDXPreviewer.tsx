@@ -11,7 +11,11 @@ type MDXPreviewerModalProps = {
   onDismiss: DialogOverlayProps['onDismiss'];
 };
 
-type MDXData = { mdxContent: string };
+type MDXData = {
+  formError?: string;
+  mdxErrors?: { description: string; lineText: string }[];
+  mdxContent?: string;
+};
 
 const MDXPreviewerModal = (props: MDXPreviewerModalProps) => {
   const fetcher = useFetcher<MDXData>();
@@ -25,19 +29,43 @@ const MDXPreviewerModal = (props: MDXPreviewerModalProps) => {
     }
   }, [props.content, fetcher.type, fetcher.submit]);
 
+  const getContent = () => {
+    if (fetcher.data?.mdxContent) {
+      return <MDXLayout mdx={fetcher.data.mdxContent} />;
+    }
+
+    if (fetcher.data?.mdxErrors) {
+      return fetcher.data.mdxErrors.map(({ description, lineText }) => {
+        return (
+          <div className="my-2 flex flex-col gap-2">
+            <span className="flex justify-center font-bold">{description}</span>
+            <pre className="overflow-auto rounded bg-gray-100 p-4">
+              {lineText}
+            </pre>
+          </div>
+        );
+      });
+    }
+
+    let content = '';
+    if (fetcher.state === 'loading') {
+      content = 'Building MDX Layout...';
+    } else if (fetcher.data?.formError) {
+      content = fetcher.data.formError;
+    } else {
+      content = 'You need to provide content to see a preview...';
+    }
+
+    return <span className="flex justify-center font-bold">{content}</span>;
+  };
+
   return (
     <DialogOverlay
       onDismiss={props.onDismiss}
       className="fixed top-0 right-0 bottom-0 left-0 overflow-auto bg-gray-/80"
     >
       <DialogContent className="my-[10vh] mx-auto max-h-[80vh] w-[60vw] overflow-scroll rounded-lg border-4 border-gray-900 bg-white p-8 outline-none">
-        {fetcher.data ? (
-          <MDXLayout mdx={fetcher.data.mdxContent} />
-        ) : (
-          <span className="flex justify-center font-bold">
-            You need to provide content to see a preview...
-          </span>
-        )}
+        {getContent()}
       </DialogContent>
     </DialogOverlay>
   );
