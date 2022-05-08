@@ -8,4 +8,9 @@ module.exports = {
   serverBuildDirectory: 'build',
   devServerPort: 8002,
   ignoredRouteFiles: ['.*'],
+  serverDependenciesToBundle: [
+    'rehype-postcss',
+    'unist-util-visit-parents',
+    'unist-util-is',
+  ],
 };
