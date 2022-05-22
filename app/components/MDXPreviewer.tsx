@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useFetcher } from 'remix';
 import { DialogOverlay, DialogContent } from '@reach/dialog';
 import type { DialogOverlayProps } from '@reach/dialog';
+import { MDXEditor } from './MDXEditor';
 import { MDXLayout } from './MDXLayout';
 
 type MDXPreviewerProps = { content: string; fieldName: string };
@@ -16,6 +17,8 @@ type MDXData = {
   mdxErrors?: { description: string; lineText: string }[];
   mdxContent?: string;
 };
+
+type FormattedContent = { formError?: string; value?: string };
 
 const MDXPreviewerModal = (props: MDXPreviewerModalProps) => {
   const fetcher = useFetcher<MDXData>();
@@ -64,15 +67,48 @@ const MDXPreviewerModal = (props: MDXPreviewerModalProps) => {
       onDismiss={props.onDismiss}
       className="fixed top-0 right-0 bottom-0 left-0 overflow-auto bg-gray-/80"
     >
-      <DialogContent className="my-[10vh] mx-auto max-h-[80vh] w-[60vw] overflow-scroll rounded-lg border-4 border-gray-900 bg-white p-8 outline-none">
+      <DialogContent className="my-[10vh] mx-auto max-h-[80vh] w-[60vw] overflow-auto rounded-lg border-4 border-gray-900 bg-white p-8 outline-none">
         {getContent()}
       </DialogContent>
     </DialogOverlay>
   );
 };
 
+function useFormattedContent(defaultValue: string) {
+  const contentRef = useRef<HTMLInputElement>(null);
+  const [formattedContent, setFormattedContent] = useState<FormattedContent>({
+    value: defaultValue,
+    formError: '',
+  });
+
+  const fetcher = useFetcher<FormattedContent>();
+  useEffect(() => {
+    if (fetcher.data) {
+      setFormattedContent(fetcher.data);
+    }
+  }, [fetcher.data]);
+
+  const formatValue = (content: string) => {
+    if (contentRef.current) {
+      setFormattedContent((prevContent) => ({
+        ...prevContent,
+        value: contentRef.current?.value ?? '',
+      }));
+    }
+
+    fetcher.submit(
+      { content },
+      { method: 'post', action: '/admin/format-content' },
+    );
+  };
+
+  return { formattedContent, formatValue, contentRef };
+}
+
 export const MDXPreviewer = (props: MDXPreviewerProps) => {
-  const content = useRef<HTMLTextAreaElement>(null);
+  const { formattedContent, formatValue, contentRef } = useFormattedContent(
+    props.content,
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const open = () => setIsModalOpen(true);
   const close = () => setIsModalOpen(false);
@@ -80,10 +116,17 @@ export const MDXPreviewer = (props: MDXPreviewerProps) => {
   return (
     <>
       <div className="flex flex-col gap-1">
-        <div className="flex justify-between">
-          <label className="font-bold" htmlFor="mdx-content-editor">
+        <div className="flex gap-4">
+          <label className="mr-auto font-bold" id="mdx-content-editor">
             Content:
           </label>
+          <button
+            type="button"
+            className="font-bold italic text-primary hover:text-gray-800"
+            onClick={() => formatValue(contentRef.current?.value ?? '')}
+          >
+            Format
+          </button>
           <button
             type="button"
             className="font-bold italic text-primary hover:text-gray-800"
@@ -92,17 +135,25 @@ export const MDXPreviewer = (props: MDXPreviewerProps) => {
             Preview
           </button>
         </div>
-        <textarea
-          id="mdx-content-editor"
-          ref={content}
-          className="h-96 resize-none rounded border border-gray-900 py-1 px-2"
-          defaultValue={props.content ?? ''}
+        <MDXEditor
+          labeledBy="mdx-content-editor"
+          content={formattedContent.value ?? ''}
+          onChange={(value) => {
+            if (contentRef.current) {
+              contentRef.current.value = value;
+            }
+          }}
+        />
+        <input
+          type="hidden"
           name={props.fieldName}
+          ref={contentRef}
+          defaultValue={formattedContent.value ?? ''}
         />
       </div>
       {isModalOpen && (
         <MDXPreviewerModal
-          content={content.current?.value ?? ''}
+          content={contentRef.current?.value ?? ''}
           onDismiss={close}
         />
       )}
