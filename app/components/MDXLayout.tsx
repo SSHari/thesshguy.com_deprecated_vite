@@ -78,7 +78,7 @@ const MDXErrorBoundaryFallback = (props: FallbackProps) => {
 export const MDXLayout = ({ mdx }: { mdx: string }) => {
   const Component = useMemo(() => getMDXComponent(mdx), [mdx]);
   return (
-    <div className="isolate">
+    <div className="isolate px-4">
       <ErrorBoundary
         FallbackComponent={MDXErrorBoundaryFallback}
         resetKeys={[Component]}
