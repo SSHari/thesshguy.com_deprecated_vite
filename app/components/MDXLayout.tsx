@@ -22,8 +22,19 @@ const a = (props: any) => (
   <a className="font-medium text-primary hover:text-gray-600" {...props} />
 );
 
-const code = ({ children = '', className = '' }: any) => {
+const code = (props: any) => {
+  const { children = '', className = '' } = props;
   const [_, lang] = className.split('-');
+
+  if (!lang) {
+    return (
+      <code
+        className="rounded bg-gray-200 p-1 pb-0.5 text-secondary"
+        {...props}
+      />
+    );
+  }
+
   return (
     // Offset the padding added by the parent to allow for
     // code blocks to extend to the edges on smaller screens.
@@ -32,10 +43,6 @@ const code = ({ children = '', className = '' }: any) => {
     </div>
   );
 };
-
-const inlineCode = (props: any) => (
-  <code className="rounded bg-gray-200 p-1 pb-0.5 text-secondary" {...props} />
-);
 
 /* Shortcodes */
 
@@ -52,7 +59,7 @@ const TopicText = (props: any) => (
   <span {...props} className="font-medium text-secondary" />
 );
 
-const components = { h1, h2, h3, a, code, inlineCode, Aside, TopicText };
+const components = { h1, h2, h3, a, code, Aside, TopicText };
 
 const MDXErrorBoundaryFallback = (props: FallbackProps) => {
   return (
