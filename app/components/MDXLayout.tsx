@@ -39,12 +39,20 @@ const inlineCode = (props: any) => (
 
 /* Shortcodes */
 
+// A block of text that should be emphasized
+export const Aside = (props: any) => (
+  <div
+    {...props}
+    className={'rounded-md bg-gray-200 py-2 px-4 text-gray-800'}
+  />
+);
+
 // Text that is important for the topic being discussed
 const TopicText = (props: any) => (
   <span {...props} className="font-medium text-secondary" />
 );
 
-const components = { h1, h2, h3, a, code, inlineCode, TopicText };
+const components = { h1, h2, h3, a, code, inlineCode, Aside, TopicText };
 
 const MDXErrorBoundaryFallback = (props: FallbackProps) => {
   return (
