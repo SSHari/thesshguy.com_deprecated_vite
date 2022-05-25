@@ -2,6 +2,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import type { ReactCodeMirrorProps } from '@uiw/react-codemirror';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { languages } from '@codemirror/language-data';
+import { EditorView } from '@codemirror/view';
 import { vim } from '@replit/codemirror-vim';
 
 type MDXEditorProps = {
@@ -22,6 +23,7 @@ export const MDXEditor = ({ content, onChange, labeledBy }: MDXEditorProps) => {
       extensions={[
         vim(),
         markdown({ base: markdownLanguage, codeLanguages: languages }),
+        EditorView.lineWrapping,
       ]}
     />
   );
