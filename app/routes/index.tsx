@@ -39,10 +39,42 @@ export default function IndexRoute() {
         </p>
         <p>
           If you stuck with me for this long then here's what I do. I build
-          things. Usually front end applications. Usually with React.
+          things.
         </p>
         <p>
-          I'm currently building things at <strong>RSA Security</strong>.
+          Here's a couple of highlights:
+          <ul className="mt-2 flex list-inside list-disc flex-col gap-2">
+            <li>
+              <strong>React</strong> for the frontend
+            </li>
+            <li>
+              <strong>Node</strong> for the backend
+            </li>
+            <li>
+              <strong>Python</strong> for the data pipelines
+            </li>
+            <li>
+              <strong>Elasticsearch</strong> for the data storage / retrieval
+            </li>
+            <li>
+              <strong>Docker</strong> and <strong>Kubernetes</strong> for the
+              services
+            </li>
+            <li>
+              <strong>AWS</strong> for the cloud and <strong>Terraform</strong>{' '}
+              to codify the infrastructure
+            </li>
+            <li>
+              <strong>Lua</strong> to fuel that sweet sweet{' '}
+              <strong>Neovim</strong> life
+            </li>
+          </ul>
+        </p>
+        <p>
+          I used to build things at <strong>RSA Security</strong>.
+        </p>
+        <p>
+          Today I build things at <strong>Dragos</strong>.
         </p>
         <p>And yes. Don't worry. The irony isn't lost on me.</p>
       </main>
