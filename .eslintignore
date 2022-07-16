@@ -1,6 +1,7 @@
 node_modules
 babel.config.js
 prettier.config.js
+remix.config.js
 **/__tests__/**
 build
 public/build
