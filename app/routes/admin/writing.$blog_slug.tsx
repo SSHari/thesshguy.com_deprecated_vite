@@ -7,6 +7,7 @@ import {
 } from 'remix';
 import type { ActionFunction, LoaderFunction } from 'remix';
 import { BlogEditor } from '~/components/BlogEditor';
+import { getRedisClient, redisKeys } from '~/utils/redis.server';
 import { createAuthClient } from '~/utils/supabase.server';
 import type { definitions } from '~/types/supabase';
 import { getAuthToken } from '~/utils/session.server';
@@ -69,19 +70,26 @@ export const action: ActionFunction = async ({ request }) => {
     )
     .eq('blog_id', blog_id);
 
-  if (!error && is_published) return redirect(`/writing/${blog_slug}`);
-  else if (!error) return redirect('/admin');
+  if (error) {
+    return badRequest({
+      formData: {
+        blog_id: Number(blog_id),
+        title,
+        blog_slug,
+        is_published,
+        content,
+      },
+      formError: 'There was an error updating the blog.',
+    });
+  }
 
-  return badRequest({
-    formData: {
-      blog_id: Number(blog_id),
-      title,
-      blog_slug,
-      is_published,
-      content,
-    },
-    formError: 'There was an error updating the blog.',
-  });
+  // Clear the writing list and post in the cache
+  const redis = await getRedisClient();
+  await redis.del(redisKeys.WRITING_LIST);
+  await redis.del(redisKeys.WRITING_POST(blog_slug));
+
+  if (is_published) return redirect(`/writing/${blog_slug}`);
+  return redirect('/admin');
 };
 
 export default function EditBlog() {

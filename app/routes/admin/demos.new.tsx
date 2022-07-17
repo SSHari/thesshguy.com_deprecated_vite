@@ -1,6 +1,7 @@
 import { useActionData, useTransition, redirect, json } from 'remix';
 import type { ActionFunction } from 'remix';
 import { DemoEditor } from '~/components/DemoEditor';
+import { getRedisClient, redisKeys } from '~/utils/redis.server';
 import { createAuthClient } from '~/utils/supabase.server';
 import type { definitions } from '~/types/supabase';
 import { getAuthToken, getUser } from '~/utils/session.server';
@@ -42,13 +43,19 @@ export const action: ActionFunction = async ({ request }) => {
       { returning: 'minimal' },
     );
 
-  if (!error && is_published) return redirect(`/demos/${demo_slug}`);
-  else if (!error) return redirect('/admin');
+  if (error) {
+    return badRequest({
+      formData: { title, demo_slug, til_link, is_published, content },
+      formError: 'There was an error creating the demo.',
+    });
+  }
 
-  return badRequest({
-    formData: { title, demo_slug, til_link, is_published, content },
-    formError: 'There was an error creating the demo.',
-  });
+  // Clear the demo list in the cache
+  const redis = await getRedisClient();
+  await redis.del(redisKeys.DEMO_LIST);
+
+  if (is_published) return redirect(`/demos/${demo_slug}`);
+  return redirect('/admin');
 };
 
 export default function NewDemo() {

@@ -2,6 +2,7 @@ import { useLoaderData, Link } from 'remix';
 import type { LoaderFunction } from 'remix';
 import type { definitions } from '~/types/supabase';
 import { githubUrl } from '~/utils/constants';
+import { getRedisClient, redisKeys } from '~/utils/redis.server';
 import { supabase } from '~/utils/supabase.server';
 
 type DemoItem = Pick<
@@ -11,6 +12,12 @@ type DemoItem = Pick<
 type LoaderData = DemoItem[];
 
 export const loader: LoaderFunction = async () => {
+  const redis = await getRedisClient();
+
+  // Return the cached demo post list instead of hitting the DB
+  const cachedList = await redis.getJson(redisKeys.DEMO_LIST);
+  if (cachedList) return cachedList as LoaderData;
+
   const { data, error } = await supabase
     .from<LoaderData>('Demos')
     .select('demo_id, title, updated_at, demo_slug, til_link');
@@ -18,6 +25,9 @@ export const loader: LoaderFunction = async () => {
   if (error) {
     throw new Response(error.message, { status: 404 });
   }
+
+  // Store the demo list in the cache
+  await redis.setJson(redisKeys.DEMO_LIST, data);
 
   return data;
 };

@@ -1,6 +1,7 @@
 import { useLoaderData, Link } from 'remix';
 import type { LoaderFunction } from 'remix';
 import type { definitions } from '~/types/supabase';
+import { getRedisClient, redisKeys } from '~/utils/redis.server';
 import { supabase } from '~/utils/supabase.server';
 
 type BlogItem = Pick<
@@ -10,6 +11,12 @@ type BlogItem = Pick<
 type LoaderData = BlogItem[];
 
 export const loader: LoaderFunction = async () => {
+  const redis = await getRedisClient();
+
+  // Return the cached writing post list instead of hitting the DB
+  const cachedList = await redis.getJson(redisKeys.WRITING_LIST);
+  if (cachedList) return cachedList as LoaderData;
+
   const { data, error } = await supabase
     .from<LoaderData>('Blogs')
     .select('blog_id, title, updated_at, blog_slug');
@@ -17,6 +24,9 @@ export const loader: LoaderFunction = async () => {
   if (error) {
     throw new Response(error.message, { status: 404 });
   }
+
+  // Store the writing list in the cache
+  await redis.setJson(redisKeys.WRITING_LIST, data);
 
   return data;
 };

@@ -7,6 +7,7 @@ import {
 } from 'remix';
 import type { ActionFunction, LoaderFunction } from 'remix';
 import { DemoEditor } from '~/components/DemoEditor';
+import { getRedisClient, redisKeys } from '~/utils/redis.server';
 import { createAuthClient } from '~/utils/supabase.server';
 import type { definitions } from '~/types/supabase';
 import { getAuthToken } from '~/utils/session.server';
@@ -71,20 +72,27 @@ export const action: ActionFunction = async ({ request }) => {
     )
     .eq('demo_id', demo_id);
 
-  if (!error && is_published) return redirect(`/demos/${demo_slug}`);
-  else if (!error) return redirect('/admin');
+  if (error) {
+    return badRequest({
+      formData: {
+        demo_id: Number(demo_id),
+        title,
+        demo_slug,
+        til_link,
+        is_published,
+        content,
+      },
+      formError: 'There was an error updating the demo.',
+    });
+  }
 
-  return badRequest({
-    formData: {
-      demo_id: Number(demo_id),
-      title,
-      demo_slug,
-      til_link,
-      is_published,
-      content,
-    },
-    formError: 'There was an error updating the demo.',
-  });
+  // Clear the demo list and post in the cache
+  const redis = await getRedisClient();
+  await redis.del(redisKeys.DEMO_LIST);
+  await redis.del(redisKeys.DEMO_POST(demo_slug));
+
+  if (is_published) return redirect(`/demos/${demo_slug}`);
+  return redirect('/admin');
 };
 
 export default function EditDemo() {

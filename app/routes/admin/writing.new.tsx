@@ -1,6 +1,7 @@
 import { useActionData, useTransition, redirect, json } from 'remix';
 import type { ActionFunction } from 'remix';
 import { BlogEditor } from '~/components/BlogEditor';
+import { getRedisClient, redisKeys } from '~/utils/redis.server';
 import { createAuthClient } from '~/utils/supabase.server';
 import type { definitions } from '~/types/supabase';
 import { getAuthToken, getUser } from '~/utils/session.server';
@@ -38,13 +39,19 @@ export const action: ActionFunction = async ({ request }) => {
       { returning: 'minimal' },
     );
 
-  if (!error && is_published) return redirect(`/writing/${blog_slug}`);
-  else if (!error) return redirect('/admin');
+  if (error) {
+    return badRequest({
+      formData: { title, blog_slug, is_published, content },
+      formError: 'There was an error creating the blog.',
+    });
+  }
 
-  return badRequest({
-    formData: { title, blog_slug, is_published, content },
-    formError: 'There was an error creating the blog.',
-  });
+  // Clear the writing list in the cache
+  const redis = await getRedisClient();
+  await redis.del(redisKeys.WRITING_LIST);
+
+  if (is_published) return redirect(`/writing/${blog_slug}`);
+  return redirect('/admin');
 };
 
 export default function NewBlog() {

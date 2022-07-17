@@ -3,12 +3,20 @@ import type { LoaderFunction } from 'remix';
 import { MDXLayout } from '~/components/MDXLayout';
 import { bundleMDX } from '~/utils/mdx-handler.server';
 import type { definitions } from '~/types/supabase';
+import { getRedisClient, redisKeys } from '~/utils/redis.server';
 import { supabase } from '~/utils/supabase.server';
 
 type Demo = definitions['Demos'];
 type LoaderData = Required<Pick<Demo, 'title' | 'content'>>;
 
 export const loader: LoaderFunction = async ({ params }) => {
+  const redis = await getRedisClient();
+
+  // Return the cached MDX instead of hitting the DB
+  const cachedMDX = await redis.getJson(redisKeys.DEMO_POST(params.slug!));
+  if (cachedMDX) return cachedMDX as LoaderData;
+
+  // Rebundle the MDX if it doesn't exist in the cache
   const { data, error } = await supabase
     .from<Demo>('Demos')
     .select('demo_id, title, content')
@@ -20,8 +28,12 @@ export const loader: LoaderFunction = async ({ params }) => {
   }
 
   const { code } = await bundleMDX(data?.content ?? '');
+  const loaderData: LoaderData = { title: data?.title, content: code };
 
-  return { title: data?.title, content: code };
+  // Cache the MDX
+  await redis.setJson(redisKeys.DEMO_POST(params.slug!), loaderData);
+
+  return loaderData;
 };
 
 export default function DemoPage() {
