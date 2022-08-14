@@ -1,10 +1,10 @@
-name: Deploy and Validate
+name: Validate and Deploy
 
 on:
   push:
     branches: [main]
 
-job:
+jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
@@ -32,15 +32,18 @@ job:
         uses: actions/upload-artifact@v3
         with:
           name: home-page
-          path: packages/home/dist
+          path: ./packages/home/dist
   
   deploy_home:
+    needs: validate
     runs-on: ubuntu-latest
     steps:
       - name: Download Home Page Artifact
         uses: actions/download-artifact@v3
         with:
           name: home-page
+          path: ./packages/home/dist
+
       - name: Deploy Home Page
         uses: peaceiris/actions-gh-pages@v3
         with:
