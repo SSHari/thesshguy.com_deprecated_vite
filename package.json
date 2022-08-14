@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write packages",
-    "format:check": "prettier --check packages"
+    "format:check": "prettier --check packages",
+    "validate": "prettier --check packages"
   },
   "keywords": [],
   "author": "Sai Hari",

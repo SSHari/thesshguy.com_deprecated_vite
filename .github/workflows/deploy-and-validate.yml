@@ -1,0 +1,52 @@
+name: Deploy and Validate
+
+on:
+  push:
+    branches: [main]
+
+job:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.10.0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 7.8.0
+          run_install: true
+
+      - name: Validate
+        run: pnpm validate
+
+      - name: Build Packages
+        run: pnpm run -r build
+
+      - name: Upload Home Page Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: home-page
+          path: packages/home/dist
+  
+  deploy_home:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Home Page Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: home-page
+      - name: Deploy Home Page
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          cname: thesshguy.com
+          personal_token: ${{ secrets.EXTERNAL_REPO_ACCESS_TOKEN }}
+          external_repository: sshari/sshari.github.io
+          publish_branch: main 
+          publish_dir: ./packages/home/dist
+
