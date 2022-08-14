@@ -1,0 +1,6 @@
+packages:
+  # Pages
+  - packages/home
+
+  # Config
+  - packages/config/prettier

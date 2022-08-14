@@ -1,0 +1,17 @@
+{
+  "name": "thesshguy.com",
+  "version": "1.0.0",
+  "description": "Personal website",
+  "main": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write packages",
+    "format:check": "prettier --check packages"
+  },
+  "keywords": [],
+  "author": "Sai Hari",
+  "license": "MIT",
+  "dependencies": {
+    "prettier": "^2.7.1"
+  }
+}
