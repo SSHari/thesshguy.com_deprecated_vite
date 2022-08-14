@@ -11,7 +11,7 @@
   "keywords": [],
   "author": "Sai Hari",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "prettier": "^2.7.1"
   }
 }

@@ -1,70 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
+  /* Theme CSS Variables */
+  --color-white: 0 0% 100%;
+  --color-primary: 193 82% 31%;
+  --color-secondary: 345 83% 41%;
+  --color-gray-100: 220 14% 96%;
+  --color-gray-200: 220 13% 91%;
+  --color-gray-300: 216 12% 84%;
+  --color-gray-400: 218 11% 65%;
+  --color-gray-500: 220 9% 46%;
+  --color-gray-600: 215 14% 34%;
+  --color-gray-700: 217 19% 27%;
+  --color-gray-800: 215 28% 17%;
+  --color-gray-900: 221 39% 11%;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+/* Global Styles */
+*:before,
+*:after {
+  box-sizing: border-box;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: auto;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+#___theSSHGuy {
+  /* Create a stacking content for the React app to ensure
+   * that any portals are always on top of other content.
+   */
+  isolation: isolate;
 }
-a:hover {
-  color: #535bf2;
+
+html,
+body,
+#___theSSHGuy {
+  height: 100%;
+  margin: 0;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  color: hsl(var(--color-gray-900));
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+p {
+  margin: 1.5rem 0;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Custom Layers */
+@layer components {
+  .btn-primary {
+    @apply mt-4 rounded border border-gray-900 bg-primary py-2 px-4 text-white hover:bg-gray-500 focus:bg-gray-500 active:bg-gray-700 disabled:bg-gray-300;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+}
+
+@layer utilities {
+  .clamp-width {
+    /* Set the clamp variables as a style prop where it's used */
+    width: clamp(var(--min-clamp, 0), var(--ideal-clamp, 0), var(--max-clamp, 0));
+    max-width: 100%;
   }
 }
