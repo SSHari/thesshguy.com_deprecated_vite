@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: ['./app/**/*.{js,jsx,ts,tsx,mdx}'],
   theme: {
@@ -19,6 +21,11 @@ module.exports = {
         900: 'hsl(var(--color-gray-900))',
         '/80': 'hsl(var(--color-gray-700) / .8)',
         '/90': 'hsl(var(--color-gray-700) / .9)',
+      },
+    },
+    extend: {
+      fontFamily: {
+        sans: ['Rubik', ...defaultTheme.fontFamily.sans],
       },
     },
   },
