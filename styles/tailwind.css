@@ -89,8 +89,8 @@
 :root {
   /* Theme CSS Variables */
   --color-white: 0 0% 100%;
-  --color-primary: 193 82% 31%;
-  --color-secondary: 345 83% 41%;
+
+  --color-gray-50: 210, 20%, 98%;
   --color-gray-100: 220 14% 96%;
   --color-gray-200: 220 13% 91%;
   --color-gray-300: 216 12% 84%;
@@ -100,6 +100,19 @@
   --color-gray-700: 217 19% 27%;
   --color-gray-800: 215 28% 17%;
   --color-gray-900: 221 39% 11%;
+
+  --color-primary-50: 183, 100%, 96%;
+  --color-primary-100: 185, 96%, 90%;
+  --color-primary-200: 186, 94%, 82%;
+  --color-primary-300: 187, 92%, 69%;
+  --color-primary-400: 188, 86%, 53%;
+  --color-primary-500: 189, 94%, 43%;
+  --color-primary-600: 192, 91%, 36%;
+  --color-primary-700: 193 82% 31%;
+  --color-primary-800: 194, 70%, 27%;
+  --color-primary-900: 196, 64%, 24%;
+
+  --color-secondary: 345 83% 41%;
 }
 
 /* Global Styles */
