@@ -129,10 +129,6 @@ body {
   color: hsl(var(--color-gray-900));
 }
 
-p {
-  margin: 1.5rem 0;
-}
-
 /* Custom Layers */
 @layer components {
   .btn-primary {
